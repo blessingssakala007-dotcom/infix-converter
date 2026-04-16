@@ -1,0 +1,32 @@
+REVERSE infix expression
+
+SWAP '(' with ')'
+
+CREATE empty prefix string
+CREATE empty stack
+
+FOR each character c in reversed expression:
+    IF c is operand:
+        append c to prefix
+
+    ELSE IF c is '(':
+        push c to stack
+
+    ELSE IF c is ')':
+        WHILE stack not empty AND top != '(':
+            pop and append to prefix
+        pop '('
+
+    ELSE IF c is operator:
+        WHILE stack not empty AND precedence(top) > precedence(c):
+            pop and append to prefix
+        push c to stack
+
+END FOR
+
+WHILE stack not empty:
+    pop and append to prefix
+
+REVERSE prefix
+
+RETURN prefix
